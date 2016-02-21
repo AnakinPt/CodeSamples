@@ -47,4 +47,10 @@ public class UserDaoServiceImpl implements UserDaoService {
 			throw new IllegalStateException(e);
 		}
 	}
+
+	@Override
+	public User save(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -2,11 +2,8 @@ package pt.com.hugodias.cache.dao;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class User implements Serializable {
@@ -14,6 +11,7 @@ public class User implements Serializable {
 	/**
 	 * 
 	 */
+	@Transient
 	private static final long serialVersionUID = 1L;
 
 	@Id
