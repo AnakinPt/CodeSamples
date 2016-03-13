@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 
+import pt.com.hugodias.sample.game.entities.Field;
+
 @Configuration
 @Import(value=AppConfig.class)
 public class TestConfig {
@@ -28,5 +30,16 @@ public class TestConfig {
 	public int suspensionTime(){
 		return 1000;
 	}
+	
+	@Bean
+	@Scope("singleton")
+	public Game game(){
+		return new GameExtensionForTest(field());
+	}
 
+	@Bean
+	@Scope("singleton")
+	public Field field(){
+		return new Field(max_row(), max_column());
+	}
 }

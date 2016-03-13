@@ -76,7 +76,7 @@ public class AppConfig {
 	@Bean(name="max_row")
 	@Scope("singleton")
 	public int max_row(){
-		return 10;
+		return 100;
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class AppConfig {
 	@Bean(name="max_column")
 	@Scope("singleton")
 	public int max_column(){
-		return 10;
+		return 100;
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class AppConfig {
 	@Bean(name="max_players")
 	@Scope("singleton")
 	public int max_players(){
-		return 5;
+		return 10;
 	}
 	
 	@Bean(name="suspensionTime")

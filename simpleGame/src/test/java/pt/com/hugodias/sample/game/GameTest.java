@@ -114,41 +114,66 @@ public class GameTest {
 
 	@Test
 	public void testEndgame() throws InvalidPositionException, GameAlreadyStarted, TooMuchPlayers{
-		Field fieldSpy = Mockito.spy(field);
 		Position position = context.getBean(Position.class);
 		position.setRow(6);
 		position.setColumn(5);
 		Player playerStatic = context.getBean(Player.class, "B", position);
 		field.addPlayer(playerStatic);
-
-		Mockito.when(fieldSpy.getFreePosition()).thenAnswer(new Answer<Position>() {
-
-			@Autowired
-			private Position position;
-			
-			@Override
-			public Position answer(InvocationOnMock invocation) throws Throwable {
-				position.setRow(4);
-				position.setColumn(4);
-				return position;
-			}
-		});
 		
 		position = context.getBean(Position.class);
 		position.setRow(4);
 		position.setColumn(4);
 		Player player = context.getBean(Player.class, "A", position);
-		field.addPlayer(player);
-		player.moveRight();
 		
-		synchronized (this) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				
-			}
-		}
+		game.start();
+		player.booked();
+		player.booked();
 		assertEquals(GameStatus.ENDED, game.getStatus());
+	}
+
+	@Test
+	public void testMovingAllDirections() throws InvalidPositionException, GameAlreadyStarted, TooMuchPlayers{
+		Position position = context.getBean(Position.class);
+		position.setRow(0);
+		position.setColumn(0);
+		Player playerStatic = context.getBean(Player.class, "B", position);
+		field.addPlayer(playerStatic);
+
+		position = context.getBean(Position.class);
+		position.setRow(4);
+		position.setColumn(4);
+		Player player = context.getBean(Player.class, "A", position);
+		game.start();
+
+		player.moveLeft();
+		player.moveRight();
+		player.moveUp();
+		player.moveDown();
+		
+		assertEquals(4, player.getPosition().getRow());
+		assertEquals(4, player.getPosition().getColumn());
+		assertEquals("A", player.toString());
+	}
+	
+	@Test
+	public void testMovingRandomly() throws InvalidPositionException, GameAlreadyStarted, TooMuchPlayers{
+		Position position = context.getBean(Position.class);
+		position.setRow(0);
+		position.setColumn(0);
+		Player playerStatic = context.getBean(Player.class, "B", position);
+		field.addPlayer(playerStatic);
+
+		position = context.getBean(Position.class);
+		position.setRow(9);
+		position.setColumn(5);
+		assertEquals("Position [row=9, column=5]", position.toString());
+		Player player = context.getBean(Player.class, "A", position);
+		game.start();
+
+		for(int i = 0; i< 20 ; i++)
+			player.move();
+		
+		assertEquals("A", player.toString());
 	}
 
 }

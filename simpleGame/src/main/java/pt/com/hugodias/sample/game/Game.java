@@ -116,6 +116,7 @@ public class Game implements ApplicationContextAware {
 			}, 0, 1000);
 			timers.put(player,timer);
 		}
+		status = GameStatus.IN_PROGRESS;
 	}
 
 	public Field getField() {
@@ -154,4 +155,14 @@ public class Game implements ApplicationContextAware {
 			endGame(entry.getKey());
 		}
 	}
+	
+	protected void setStatus(GameStatus status){
+		this.status = status;
+	}
+
+	protected Map<Player, Timer> getTimers() {
+		return timers;
+	}
+	
+	
 }
