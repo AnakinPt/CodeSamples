@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:hz="http://www.hazelcast.com/schema/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.hazelcast.com/schema/spring http://www.hazelcast.com/schema/spring/hazelcast-spring.xsd">
+
+	<!-- <context:component-scan base-package="com.hazelcast.springconfiguration.annotated"/> -->
+<context:annotation-config />
+
+
+	<hz:hazelcast id="instance">
+		<hz:config>
+			<hz:group name="dev" password="dev" />
+			<hz:properties>
+				<hz:property name="hazelcast.merge.first.run.delay.seconds">5</hz:property>
+				<hz:property name="hazelcast.merge.next.run.delay.seconds">5</hz:property>
+			</hz:properties>
+			<hz:network port="5701" port-auto-increment="true">
+				<hz:join>
+					<hz:multicast enabled="true" />
+				</hz:join>
+			</hz:network>
+			<hz:map name="purchases">
+				<hz:near-cache time-to-live-seconds="30"
+					max-idle-seconds="30" eviction-policy="LFU" max-size="50"
+					invalidate-on-change="true" />
+			</hz:map>
+		</hz:config>
+	</hz:hazelcast>
+</beans>
