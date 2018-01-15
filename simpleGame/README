@@ -1,0 +1,3 @@
+This is a small game of players that can move across a field and have a referee to judge their movements. No player can move to a position next to another player.
+
+This was developed using Spring Boot and Spring AOP.
