@@ -1,0 +1,1 @@
+This is a small project, using Spring Batch and Spring Boot to read an Excel file with my bank statement to convert it into a QIF file so I could import it into Microsoft Money
