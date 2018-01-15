@@ -1,0 +1,1 @@
+This small project simulates the purchange and sell of stocks. This uses Hazelcast as a caching solution for simulating the database acess.
