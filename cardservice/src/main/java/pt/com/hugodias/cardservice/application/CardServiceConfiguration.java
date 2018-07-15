@@ -1,6 +1,7 @@
 package pt.com.hugodias.cardservice.application;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import pt.com.hugodias.cardservice.service.CardService;
@@ -9,6 +10,7 @@ import pt.com.hugodias.cardservice.thirdparty.BinListDetailsProviderService;
 import pt.com.hugodias.cardservice.thirdparty.ICardDetailsProviderService;
 
 @Configuration
+@ComponentScan(basePackageClasses= {CardService.class})
 public class CardServiceConfiguration {
 
 	@Bean
